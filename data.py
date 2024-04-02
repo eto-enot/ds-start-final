@@ -8,6 +8,13 @@ import plotly.express as px
 from sqlalchemy import create_engine
 from plotly.subplots import make_subplots
 
+def _get_conn_str():
+    user = os.environ['DB_USER']
+    password = os.environ['DB_PASSWORD']
+    host = os.environ['DB_HOST']
+    name = os.environ['DB_NAME']
+    return f'postgresql://{user}:{password}@{host}/{name}?sslmode=require'
+
 @st.cache_data
 def _get_salary_data(_engine):
     query = '''select b."name" as "Отрасль"'''
@@ -88,13 +95,6 @@ class SalaryService:
         return result
 
     def reload_data(self):
-        def _get_conn_str():
-            user = os.environ['DB_USER']
-            password = os.environ['DB_PASSWORD']
-            host = os.environ['DB_HOST']
-            name = os.environ['DB_NAME']
-            return f'postgresql://{user}:{password}@{host}/{name}?sslmode=require'
-        
         try:
             engine = create_engine(_get_conn_str())
             self._data = _get_salary_data(engine)
