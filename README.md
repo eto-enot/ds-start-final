@@ -19,7 +19,7 @@
 
 Приложение Streamlit: https://ds-start-final-eedhb6e75butbtjwm3u9vn.streamlit.app/
 
-В приложении используется БД.
+В приложении используется БД (см. data.py).
 
 #### Автор
 
