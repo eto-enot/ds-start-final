@@ -27,16 +27,17 @@ service.set_filter(branches, years[0], years[1])
 st.markdown("#### Данные о номинальной начисленной заработной плате по выбранным отраслям:")
 st.table(service.get_data())
 
+st.markdown(f"##### Графическое представление значений номинальной {('и реальной ' if show_infl else '')}заработной платы:");
 fig = service.get_salary_plot(years[0], years[1], show_infl)
 st.plotly_chart(fig, use_container_width=True)
 
-st.markdown(f"#### Заработная плата, дисконтированная к ценам {years[1]} гг.:")
+st.markdown(f"##### Заработная плата, дисконтированная к ценам {years[1]} гг.:")
 
 fig = service.get_salary_discount_plot(years[0], years[1])
 st.plotly_chart(fig, use_container_width=True)
 
 st.markdown(f'##### Наименьшие и наибольшие з/п по отраслям по состоянию на {years[1]} г.')
-st.markdown('Наведите мышь на столбец, чтобы увидеть название')
+st.markdown('Наведите мышь на столбец, чтобы увидеть название.')
 
 fig = service.get_min_max_salary_plot(years[1])
 st.plotly_chart(fig, use_container_width=True)
@@ -45,6 +46,7 @@ st.markdown('''##### Выводы
 1. З/п по всем отраслям растут. Без учета инфляции, рост номинальной средней з/п более чем в 33 раза за 2000-2023 гг.
 2. Наименьшие з/п в легкой промышленности (производство одежды), наибольшие - в добыче нефти и газа.''')
 
+st.markdown('---')
 st.markdown('#### Влияние инфляции на изменение з/п')
 st.markdown('Динамика роста заработной платы относительно уровня инфляции:')
 
@@ -76,6 +78,7 @@ st.markdown('''Посмотрим на зависимость изменения
 
 st.plotly_chart(service.get_additional_heatmap(years[0], years[1]), use_container_width=True)
 
+st.markdown('---')
 st.markdown('##### Выводы')
 st.markdown('''1. Сильная корреляция средней з/п с ВВП. Менее выраженная корреляция с индексом счастья
 и коэффициентом Джини.
